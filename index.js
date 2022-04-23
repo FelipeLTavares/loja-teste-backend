@@ -23,7 +23,7 @@ app.use(express.urlencoded({extended: true, limit: '4mb'}));
 app.use(helmet());
 app.use(expressSanitizer());
 app.use(limiter);
-app.use(cors());
+app.use(cors({origin: true}));
 
 app.use('/api', Router);
 
