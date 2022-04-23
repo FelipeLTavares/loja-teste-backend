@@ -1,7 +1,15 @@
 import 'dotenv/config';
 import { MongoClient, ObjectId } from 'mongodb';
-import cloudinary from '../Cloudinary/cloudinary.js';
+/* import cloudinary from '../Cloudinary/cloudinary.js'; */
 import expressSanitizer from "express-sanitizer";
+import { v2 as cloudinary } from 'cloudinary'
+
+cloudinary.config({ 
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
+  api_key: process.env.CLOUDINARY_API_KEY, 
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true
+});
 
 //MONGODB CLIENT
 const client = new MongoClient(process.env.MONGO_DB_CONECTION);
