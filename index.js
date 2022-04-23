@@ -15,7 +15,7 @@ app.use(express.urlencoded({extended: true, limit: '4mb'}));
 app.use(helmet());
 app.use(expressSanitizer());
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', /* 'http://localhost:3000' */ 'https://loja-teste-frontend.vercel.app/' );
+  res.setHeader('Access-Control-Allow-Origin', /* 'http://localhost:3000' */ 'https://loja-teste-frontend.vercel.app/*' );
   res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE');
   return next();
 });
