@@ -2,7 +2,7 @@ import express from "express";
 import 'dotenv/config';
 
 import { getProduto, getVitrine, postListaProdutos } from "./Controllers/ControllersCliente.js";
-import { controlelogin, deletarProduto, postarProduto } from "./Controllers/COntrollersGerente.js";
+import { controlelogin, deletarProduto, postarProduto } from "./Controllers/ControllersGerente.js";
 
 const Router = express.Router();
 

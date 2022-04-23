@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import { MongoClient, ObjectId } from 'mongodb';
-import expressSanitizer from 'express-sanitizer';
 
 const client = new MongoClient(process.env.MONGO_DB_CONECTION);
 

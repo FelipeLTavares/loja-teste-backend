@@ -1,16 +1,10 @@
 import 'dotenv/config';
 import { MongoClient, ObjectId } from 'mongodb';
-import cloudinary from '../cloudinary/cloudinary.js';
-import expressSanitizer from 'express-sanitizer';
+import cloudinary from '../Cloudinary/cloudinary.js';
+import expressSanitizer from "express-sanitizer";
 
 //MONGODB CLIENT
 const client = new MongoClient(process.env.MONGO_DB_CONECTION);
-
-//FUNÇÃO CUSTOMIZADA DE SANITIZAÇÃO
-const verificarCaracteresEsp = (str) => {
-  const regex = new RegExp(/\W|_/);
-  return regex.test(str)
-}
 
 //FUNCAO DE VERIFICACAO
 const funcaoDeVerificacao = async (tokenn) => {
@@ -42,7 +36,6 @@ export const controlelogin = async (req, res) => {
   const usuario = req.sanitize(req.body.usuario);
   const senha = req.sanitize(req.body.senha);
 
-  if (!(verificarCaracteresEsp(usuario)) && !(verificarCaracteresEsp(usuario))) {
     try {
       await client.connect();
       await client.db('Loja').collection('logins').find({
@@ -56,9 +49,7 @@ export const controlelogin = async (req, res) => {
     } finally {
       await client.close()
     }
-  } else {
-    res.json("USUARIO E/OU SENHA INVALIDOS")
-  }
+
 }
 
 
