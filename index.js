@@ -2,9 +2,17 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import expressSanitizer from 'express-sanitizer';
+import rateLimit from 'express-rate-limit';
 import 'dotenv/config';
 
 import Router from './router.js';
+
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+	standardHeaders: true,
+	legacyHeaders: false,
+})
 
 //Server
 const app = express();
@@ -13,12 +21,8 @@ app.use(cors());
 app.use(express.json({limit: '4mb'}));
 app.use(express.urlencoded({extended: true, limit: '4mb'}));
 app.use(helmet());
+app.use(limiter);
 app.use(expressSanitizer());
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', /* 'http://localhost:3000' */ 'https://loja-teste-frontend.vercel.app/*' );
-  res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE');
-  return next();
-});
 
 app.use('/api', Router);
 
